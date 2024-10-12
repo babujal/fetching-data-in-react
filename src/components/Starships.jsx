@@ -14,7 +14,7 @@ const Starships = (props) => {
         const handleSubmit = e => {
             e.preventDefault()
             const shipSearch = new FormData(e.target)
-            const submitedString = shipSearch.get('starShip')
+            const submitedString = shipSearch.get('starShip').toLowerCase()
             console.log(submitedString)
             axios
                 .get(`https://swapi.dev/api/starships/?search=${submitedString}`)
@@ -30,6 +30,7 @@ const Starships = (props) => {
                     )
                     navigate('/result')
                 })
+            e.target.reset()
         }
 
         return (
