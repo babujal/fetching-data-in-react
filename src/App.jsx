@@ -7,7 +7,18 @@ import './App.css'
 
 function App() {
   const [starShips, setStarShips] = useState([])
-  const [starShip, setStarShip] = useState()
+  const [starShip, setStarShip] = useState(
+    {
+      name: '',
+      starship_class: '',
+      manufacturer: '',
+      model: ''
+    }
+  )
+
+  useEffect(() => {
+    console.log('Ship found:', starShip)
+  }, [starShip])
 
   useEffect(() => {
     axios
@@ -23,8 +34,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<Starships starShips={starShips} />}/>
-        <Route path='/search' element={<StarshipSearch starShips={starShips} />}/>
+        <Route path='/' element={<Starships starShips={starShips} setStarShip={setStarShip}/>}/>
+        <Route path='/result' element={<StarshipSearch starShip={starShip} setStarShip={setStarShip}/>}/>
       </Routes>
     </>
   )
